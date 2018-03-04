@@ -16,11 +16,11 @@ $("#sendMessage").on("click", function(event){
     event.preventDefault();
 
     var message = $("#typeMessage").val().trim();
-
-   
+    var timeStamp = Date();
 
     database.ref().set({
-      message: message
+      message: message,
+      timeStamp: timeStamp
     });
 
     $("#typeMessage").val("");
@@ -35,5 +35,6 @@ $(".container").keyup(function (event) {
 
 database.ref().on("value", function(snapshot){
     message = snapshot.val().message;
-    $("#chatBox").append(message + "<br>");
+    timeStamp = Date();
+    $("#chatBox").append("(" + timeStamp + "): " + message + "<br>");
 });
