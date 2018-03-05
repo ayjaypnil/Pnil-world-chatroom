@@ -12,6 +12,8 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+
+
 $("#sendMessage").on("click", function(event){
     event.preventDefault();
 
@@ -20,12 +22,13 @@ $("#sendMessage").on("click", function(event){
     var options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
     var timeStamp = today.toLocaleDateString('en-US', options);
 
+    var messagesRef = firebase.database().ref("messages");
 
-
-    database.ref().set({
+    database.ref("/messages").set({
       message: message,
       timeStamp: timeStamp
     });
+    
 
     $("#typeMessage").val("");
    
@@ -37,10 +40,28 @@ $(".container").keyup(function (event) {
     }
 });
 
-database.ref().on("value", function(snapshot){
+
+
+database.ref("/messages").on("value", function(snapshot){
     message = snapshot.val().message;
+   
     var today = new Date();
     var options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
     var timeStamp = today.toLocaleDateString('en-US', options);
     $("#chatBox").append("<div id='messageFull'><strong>" + timeStamp + ": </strong><span id='messageText'>" + message + "</span></div>");
+});
+
+// Live connected feature
+var connectionsRef = database.ref("/connections");
+var connectedRef = database.ref(".info/connected");
+
+connectedRef.on("value", function(snap) {
+  if (snap.val()) {
+    var con = connectionsRef.push(true);
+    con.onDisconnect().remove();
+  }
+});
+
+connectionsRef.on("value", function(snap) {
+  $("#connectedNum").text(snap.numChildren());
 });

@@ -9,3 +9,7 @@
 #messageText{
     color: rgb(155, 155, 255);
 }
+
+#chatCount{
+    align-content: center;
+}
