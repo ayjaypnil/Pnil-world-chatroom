@@ -16,7 +16,11 @@ $("#sendMessage").on("click", function(event){
     event.preventDefault();
 
     var message = $("#typeMessage").val().trim();
-    var timeStamp = Date();
+    var today = new Date();
+    var options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    var timeStamp = today.toLocaleDateString('en-US', options);
+
+
 
     database.ref().set({
       message: message,
@@ -35,6 +39,8 @@ $(".container").keyup(function (event) {
 
 database.ref().on("value", function(snapshot){
     message = snapshot.val().message;
-    timeStamp = Date();
-    $("#chatBox").append("(" + timeStamp + "): " + message + "<br>");
+    var today = new Date();
+    var options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    var timeStamp = today.toLocaleDateString('en-US', options);
+    $("#chatBox").append("<div id='messageText'><strong>" + timeStamp + ": </strong>" + message + "<br></div>");
 });
