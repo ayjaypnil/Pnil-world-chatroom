@@ -5,3 +5,7 @@
     overflow: scroll;
    
 }
+
+#messageText{
+    color: rgb(155, 155, 255);
+}

@@ -42,5 +42,5 @@ database.ref().on("value", function(snapshot){
     var today = new Date();
     var options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
     var timeStamp = today.toLocaleDateString('en-US', options);
-    $("#chatBox").append("<div id='messageText'><strong>" + timeStamp + ": </strong>" + message + "<br></div>");
+    $("#chatBox").append("<div id='messageFull'><strong>" + timeStamp + ": </strong><span id='messageText'>" + message + "</span></div>");
 });
