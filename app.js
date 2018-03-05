@@ -22,14 +22,11 @@ $("#sendMessage").on("click", function(event){
     var options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
     var timeStamp = today.toLocaleDateString('en-US', options);
 
-    var messagesRef = firebase.database().ref("messages");
-
     database.ref("/messages").set({
       message: message,
       timeStamp: timeStamp
     });
     
-
     $("#typeMessage").val("");
    
 });
@@ -39,7 +36,6 @@ $(".container").keyup(function (event) {
         $("#sendMessage").click();
     }
 });
-
 
 
 database.ref("/messages").on("value", function(snapshot){
