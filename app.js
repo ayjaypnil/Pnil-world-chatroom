@@ -22,28 +22,31 @@ $("#sendMessage").on("click", function(event){
     var options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
     var timeStamp = today.toLocaleDateString('en-US', options);
 
-    database.ref("/messages").set({
-      message: message,
-      timeStamp: timeStamp
-    });
+   
+// writing to the database
+    database.ref("/messages").push({
+        message: message,
+        timeStamp: timeStamp,
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
+      });
     
+
     $("#typeMessage").val("");
    
 });
-
+    // just another way to register the send, "enter" button
 $(".container").keyup(function (event) {
     if (event.keyCode === 13) {
         $("#sendMessage").click();
     }
 });
 
+// grabbing from database
 
-database.ref("/messages").on("value", function(snapshot){
+database.ref("/messages").orderByChild("dateAdded").limitToLast(15).on("child_added", function(snapshot){
     message = snapshot.val().message;
+    timeStamp = snapshot.val().timeStamp;
    
-    var today = new Date();
-    var options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
-    var timeStamp = today.toLocaleDateString('en-US', options);
     $("#chatBox").append("<div id='messageFull'><strong>" + timeStamp + ": </strong><span id='messageText'>" + message + "</span></div>");
 });
 
