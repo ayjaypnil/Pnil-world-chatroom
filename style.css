@@ -1,6 +1,6 @@
 #chatBox{
-    height: 500px;
-    width: 500px;
+    height: 400px;
+    width: auto;
     border: 2px solid black;
     overflow: scroll;
 }
@@ -9,6 +9,3 @@
     color: rgb(155, 155, 255);
 }
 
-#chatCount{
-    align-content: center;
-}
