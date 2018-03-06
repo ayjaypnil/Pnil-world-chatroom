@@ -13,6 +13,10 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 
+// button animation
+$("#typeMessage").on("click", function(event){
+    $("#sendMessage").attr("class", "pulse waves-effect waves-light btn");
+});
 
 $("#sendMessage").on("click", function(event){
     event.preventDefault();
@@ -22,6 +26,8 @@ $("#sendMessage").on("click", function(event){
     var options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
     var timeStamp = today.toLocaleDateString('en-US', options);
    
+    $("#sendMessage").attr("class", "waves-effect waves-light btn");
+    
    
 // writing to the database
     database.ref("/messages").push({
