@@ -21,7 +21,7 @@ $("#sendMessage").on("click", function(event){
     var today = new Date();
     var options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
     var timeStamp = today.toLocaleDateString('en-US', options);
-    var name = $("#typeName").val();
+   
    
 // writing to the database
     database.ref("/messages").push({
@@ -46,8 +46,8 @@ $(".container").keyup(function (event) {
 database.ref("/messages").orderByChild("dateAdded").limitToLast(15).on("child_added", function(snapshot){
     message = snapshot.val().message;
     timeStamp = snapshot.val().timeStamp;
-   var name = $("#typeName").val();
-    $("#chatBox").append("<div id='messageFull'><strong>" + timeStamp + name + ": </strong><span id='messageText'>" + message + "</span></div>");
+   
+    $("#chatBox").append("<div id='messageFull'><strong>" + timeStamp + ": </strong><span id='messageText'>" + message + "</span></div>");
 });
 
 // Live connected feature
