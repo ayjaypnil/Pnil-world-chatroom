@@ -9,3 +9,14 @@
     color: rgb(155, 155, 255);
 }
 
+footer{
+    color: rgb(204, 202, 202);
+}
+
+#sendMessage{
+    background: rgb(204, 202, 202);
+}
+
+input{
+    text-align: center;
+}
