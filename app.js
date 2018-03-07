@@ -36,7 +36,7 @@ $("#sendMessage").on("click", function(event){
         dateAdded: firebase.database.ServerValue.TIMESTAMP
       });
     
-    // for the message input to clear after submission
+    // for the message input to clear after submit
     $("#typeMessage").val("");
     // for the scroll box to stay at the bottom
     $("#chatBox").scrollTop($("#chatBox")[0].scrollHeight - $("#chatBox")[0].clientHeight);
@@ -56,7 +56,7 @@ database.ref("/messages").orderByChild("dateAdded").limitToLast(15).on("child_ad
     timeStamp = snapshot.val().timeStamp;
    
     // $("#chatBox").append("<div id='messageFull'><strong>" + timeStamp + ": </strong><span id='messageText'>" + message + "</span></div>");
-    $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div id='cardDiv' class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10'><span id='messageText' class=''>" + message + "</span></div></div><p id='timestampText' class='right-align'>" + timeStamp + "</p></div></div>");
+    $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div id='cardDiv' class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10' id='messageDivDiv'><span id='messageText' class=''>" + message + "</span></div></div><p id='timestampText' class='right-align'>" + timeStamp + "</p></div></div>");
     
    
 

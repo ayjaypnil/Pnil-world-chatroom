@@ -8,6 +8,7 @@
 
 #messageText{
     color: rgb(155, 155, 255);
+    
 }
 
 footer{
@@ -35,6 +36,11 @@ input{
 #cardDiv, p {
     padding: 0 !important;
     margin: 3px !important;
+}
+
+#messageDivDiv{
+    overflow-wrap: break-word;
+    margin-right: 15px;
 }
 
 #headerDiv,
