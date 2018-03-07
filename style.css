@@ -1,8 +1,8 @@
 #chatBox{
     height: 400px;
     width: auto;
-    border: 3px solid black;
-    padding: 5px;
+    border: 3px solid rgb(194, 194, 194);
+    padding: 3px;
     overflow: scroll;
 }
 
@@ -11,7 +11,7 @@
 }
 
 footer{
-    color: rgb(204, 202, 202);
+    color: rgba(204, 202, 202, 0.671);
 }
 
 #sendMessage{
@@ -21,3 +21,16 @@ footer{
 input{
     text-align: center;
 }
+
+#mediaBox{
+    width: 100%;
+    position: relative;
+    height: auto;
+}
+#timestampText{
+    color: rgba(206, 206, 206, 0.671);
+}
+
+/* the id from above will lighten the color and can add teh timestamp for it, 
+then could use the media div to populate a random picture of a superhero or sci-fi 
+or other fantasy character as the img */

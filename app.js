@@ -53,7 +53,8 @@ database.ref("/messages").orderByChild("dateAdded").limitToLast(15).on("child_ad
     message = snapshot.val().message;
     timeStamp = snapshot.val().timeStamp;
    
-    $("#chatBox").append("<div id='messageFull'><strong>" + timeStamp + ": </strong><span id='messageText'>" + message + "</span></div>");
+    // $("#chatBox").append("<div id='messageFull'><strong>" + timeStamp + ": </strong><span id='messageText'>" + message + "</span></div>");
+    $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10'><span id='messageColor' class=''>" + message + "</span></div></div><p id='timestampText' class='right-align'>" + timeStamp + "</p></div></div>");
 });
 
 // Live connected feature
