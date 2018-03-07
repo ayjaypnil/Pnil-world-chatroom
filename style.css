@@ -1,9 +1,9 @@
 #chatBox{
     height: 433px;
     width: auto;
-    border: 3px solid rgb(194, 194, 194);
+    border: 3.33px solid rgb(194, 194, 194);
     padding: 3px;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 #messageText{
