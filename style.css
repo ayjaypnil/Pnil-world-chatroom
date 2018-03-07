@@ -24,11 +24,17 @@ input{
 
 #mediaBox{
     width: 100%;
-    position: relative;
+    /* position: relative; */
     height: auto;
+    margin: 1px;
 }
 #timestampText{
     color: rgba(206, 206, 206, 0.671);
+}
+
+#cardDiv, p {
+    padding: 0 !important;
+    margin: 3px !important;
 }
 
 /* the id from above will lighten the color and can add teh timestamp for it, 
