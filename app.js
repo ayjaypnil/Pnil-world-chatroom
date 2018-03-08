@@ -10,6 +10,39 @@ var config = {
 
 firebase.initializeApp(config);
 
+
+const btnLogin = document.getElementById('btnLogin');
+const btnLogout = document.getElementById('btnLogout');
+const stuff = document.getElementById("stuff");
+const space = document.getElementById("space");
+
+$("#btnLogin").on("click", function(){
+    firebase.auth().signInAnonymously();
+});
+$("#btnLogout").on("click", function() {
+  firebase.auth().signOut();
+});
+
+var userID;
+
+firebase.auth().onAuthStateChanged(firebaseUser => {
+ console.log(firebaseUser);
+    if(firebaseUser){
+        btnLogout.classList.remove('hide');
+        btnLogin.classList.add('hide');
+        stuff.classList.remove("hide");
+        userID = firebaseUser.uid;
+        $("#userID").html("<span><strong>" + userID + "</strong></span>");
+        space.classList.add("hide");
+    } else{
+        btnLogout.classList.add('hide');
+        btnLogin.classList.remove('hide');
+        stuff.classList.add("hide");
+        space.classList.remove("hide");
+    }
+});
+
+
 var database = firebase.database();
 
 

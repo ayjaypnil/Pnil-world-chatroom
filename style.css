@@ -13,9 +13,10 @@
 
 footer{
     color: rgba(204, 202, 202, 0.671);
+    
 }
 
-#sendMessage{
+#sendMessage, #btnLogin, #btnLogout{
     background: rgb(204, 202, 202);
 }
 
