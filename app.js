@@ -15,6 +15,7 @@ const btnLogin = document.getElementById('btnLogin');
 const btnLogout = document.getElementById('btnLogout');
 const stuff = document.getElementById("stuff");
 const space = document.getElementById("space");
+const popDiv2 = document.getElementById("populationDiv2");
 
 $("#btnLogin").on("click", function(){
     firebase.auth().signInAnonymously();
@@ -34,11 +35,13 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         userID = firebaseUser.uid;
         $("#userID").html("<span><strong>" + userID + "</strong></span>");
         space.classList.add("hide");
+        popDiv2.classList.add("hide");
     } else{
         btnLogout.classList.add('hide');
         btnLogin.classList.remove('hide');
         stuff.classList.add("hide");
         space.classList.remove("hide");
+        popDiv2.classList.remove("hide");
     }
 });
 
@@ -108,4 +111,6 @@ connectedRef.on("value", function(snap) {
 
 connectionsRef.on("value", function(snap) {
   $("#connectedNum").text(snap.numChildren());
+  $("#connectedNum2").text(snap.numChildren());
+
 });
