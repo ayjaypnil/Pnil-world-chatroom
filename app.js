@@ -61,7 +61,7 @@ var a;
 var file;
 var pathReference;
 var url;
-var v;
+var imageUrls;
 
 $("#fileButton").on("click", function() {
 // Listen for file selection
@@ -82,16 +82,26 @@ fileButton.addEventListener("change", function(e){
     console.log(pathReference);
       pathReference.getDownloadURL().then(function(url) {
         // `url` is the download URL for 'images/stars.jpg'
-        v = String(url);
-        console.log(v);
-       
+        database.ref("/medias").push({
+            url: url,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+        });
+      
     
         }).catch(function(error) {
     // Handle any errors
         });
 
+        
     });
-  $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div id='cardDiv' class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10' id='messageDivDiv'><img src='" + v + "></div></div><p id='timestampText' class='right-align'>" + timeStamp + "</p></div></div>");
+
+    database.ref("/medias").orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot){
+    url = snapshot.val().url;
+    
+    $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div id='cardDiv' class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10' id='messageDivDiv'><img src='" + url + "></div></div><p id='timestampText' class='right-align'>" + timeStamp + "</p></div></div>");
+
+});
+
     
 });
 

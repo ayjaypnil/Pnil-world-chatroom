@@ -66,3 +66,7 @@ input[type="file"] {
     float: right;
     margin-right: 50px;
 }
+img{
+    max-height: 75%;
+    max-width: 75%;
+}
