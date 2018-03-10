@@ -9,6 +9,8 @@
                 <link rel="stylesheet" type="text/css"  href="style.css">
             <!-- link to Materialize -->
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+            <!-- link to Materialize for fonts and icons -->
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <!-- Firebase Reference -->
                 <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
 
@@ -80,11 +82,18 @@
                     <div class="col s12">
                         <div id="chatMessage">
                             <center><input id="typeMessage" placeholder="Type Message Here!" type="text"></center>
-                            <center><a class="waves-effect waves-light btn" id="sendMessage">Send</a></center>
+                                <center>
+                                    <a class="waves-effect waves-light btn" id="sendMessage">Send</a>
+                                </center>
+                                 
+                               <label for="fileButton">
+                                   <a class="btn-medium" id="addPhoto"><i class="material-icons">add_a_photo</i></a>
+                                   <input type="file" label="fileButton" id="fileButton" multiple>
+                               </label>
+
                         </div>
                     </div>
                 </div>
-
             </div>
 
         <!-- closing container -->

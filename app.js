@@ -9,8 +9,10 @@ var config = {
 };
 
 firebase.initializeApp(config);
+var database = firebase.database();
 
 
+//anonymous authentication
 const btnLogin = document.getElementById('btnLogin');
 const btnLogout = document.getElementById('btnLogout');
 const stuff = document.getElementById("stuff");
@@ -24,12 +26,10 @@ $("#btnLogout").on("click", function() {
   firebase.auth().signOut();
 });
 
-
-
 var userID;
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
- console.log(firebaseUser);
+ 
     if(firebaseUser){
         btnLogout.classList.remove('hide');
         btnLogin.classList.add('hide');
@@ -48,13 +48,64 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 });
 
 
-var database = firebase.database();
+// pictures
+
+// get elements
+
+var fileButton = document.getElementById('fileButton');
+
+// set up references
+var storage = firebase.storage();
+var storageRef = storage.ref();
+var a;
+var file;
+var pathReference;
+var url;
+var v;
+
+$("#fileButton").on("click", function() {
+// Listen for file selection
+
+fileButton.addEventListener("change", function(e){
+    // get file
+    file = e.target.files[0];
+    // create a storage ref
+    a = storageRef.child('media/' + file.name);
+    console.log(a.fullPath);
+    
+    
+    // upload file
+    a.put(file);   
+
+          // download the file
+    pathReference = a;
+    console.log(pathReference);
+      pathReference.getDownloadURL().then(function(url) {
+        // `url` is the download URL for 'images/stars.jpg'
+        v = String(url);
+        console.log(v);
+       
+    
+        }).catch(function(error) {
+    // Handle any errors
+        });
+
+    });
+  $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div id='cardDiv' class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10' id='messageDivDiv'><img src='" + v + "></div></div><p id='timestampText' class='right-align'>" + timeStamp + "</p></div></div>");
+    
+});
+
+
+
+
+
 
 
 // button animation
 $("#typeMessage").on("click", function(event){
     $("#sendMessage").attr("class", "pulse waves-effect waves-light btn");
 });
+
 
 $("#sendMessage").on("click", function(event){
     event.preventDefault();
@@ -89,14 +140,11 @@ $(".container").keyup(function (event) {
 
 // grabbing from database
 
-database.ref("/messages").orderByChild("dateAdded").limitToLast(15).on("child_added", function(snapshot){
+   database.ref("/messages").orderByChild("dateAdded").limitToLast(15).on("child_added", function(snapshot){
     message = snapshot.val().message;
     timeStamp = snapshot.val().timeStamp;
-   
     // $("#chatBox").append("<div id='messageFull'><strong>" + timeStamp + ": </strong><span id='messageText'>" + message + "</span></div>");
     $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div id='cardDiv' class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10' id='messageDivDiv'><span id='messageText' class=''>" + message + "</span></div></div><p id='timestampText' class='right-align'>" + timeStamp + "</p></div></div>");
-    
-   
 
 });
 
@@ -114,5 +162,4 @@ connectedRef.on("value", function(snap) {
 connectionsRef.on("value", function(snap) {
   $("#connectedNum").text(snap.numChildren());
   $("#connectedNum2").text(snap.numChildren());
-
 });

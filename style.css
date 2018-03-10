@@ -25,6 +25,7 @@ footer{
     background: rgb(204, 202, 202);
 }
 
+
 input{
     text-align: center;
 }
@@ -52,4 +53,16 @@ input{
 #headerDiv,
 #populationDiv {
     margin: 3px !important;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.material-icons{
+    color: rgba(155, 155, 155, 0.685);
+}
+#addPhoto{
+    float: right;
+    margin-right: 50px;
 }
