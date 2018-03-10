@@ -63,48 +63,49 @@ var pathReference;
 var url;
 var imageUrls;
 
-$("#fileButton").on("click", function() {
-// Listen for file selection
-
-fileButton.addEventListener("change", function(e){
-    // get file
-    file = e.target.files[0];
-    // create a storage ref
-    a = storageRef.child('media/' + file.name);
-    console.log(a.fullPath);
     
-    
-    // upload file
-    a.put(file);   
 
-          // download the file
-    pathReference = a;
-    console.log(pathReference);
-      pathReference.getDownloadURL().then(function(url) {
-        // `url` is the download URL for 'images/stars.jpg'
-        database.ref("/medias").push({
-            url: url,
-            dateAdded: firebase.database.ServerValue.TIMESTAMP
-        });
+        fileButton.addEventListener("change", function(e){
+            // get file
+            file = e.target.files[0];
+            // create a storage ref
+            a = storageRef.child('media/' + file.name);
+            console.log(a.fullPath);
+            
+            
+            // upload file
+            a.put(file);   
+
+             // Listen for file selection
+        // download the file
+        pathReference = a;
+        console.log(pathReference);
+        pathReference.getDownloadURL().then(function(url) {
+            // `url` is the download URL 
+            // save the download url to the database
+            database.ref("/medias").push({
+                url: url
+                
+            });
       
     
         }).catch(function(error) {
-    // Handle any errors
+            if (error) throw error;
+        });
+            
         });
 
-        
+
+       
+
+
+
+    database.ref("/medias").orderByChild("dateAdded").limitToLast(5).on("child_added", function(snapshot){
+        url = snapshot.val().url;
+    
+        $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div id='cardDiv' class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10' id='messageDivDiv'><img src='" + url + "></div></div><p id='timestampText' class='right-align'></p></div></div>");
+
     });
-
-    database.ref("/medias").orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot){
-    url = snapshot.val().url;
-    
-    $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div id='cardDiv' class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10' id='messageDivDiv'><img src='" + url + "></div></div><p id='timestampText' class='right-align'>" + timeStamp + "</p></div></div>");
-
-});
-
-    
-});
-
 
 
 
