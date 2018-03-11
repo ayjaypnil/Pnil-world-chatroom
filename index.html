@@ -21,6 +21,7 @@
         
         <div class="container">
 
+            <!-- Initial log in screen Section, hides after logged in -->
             <div id= "message">
                 <div id="space" class="hide">
                     <br>
@@ -42,7 +43,7 @@
                         </center>
                     </div>
                 </div>    
-    
+                <!-- When not logged in, this is all visible, else it is hidden -->
                 <ul>
                     <li>
                         <center><a id="btnLogin" class="pulse waves-effect waves-light btn" href="#">Login Anonymously</a></center>
@@ -55,6 +56,7 @@
                 </ul>
             </div>
 
+            <!-- Anonymous User ID display -->
             <div class="hide" id="stuff">
                 <div id="headerDiv" class="row">
                     <div class="col s12">
@@ -62,6 +64,7 @@
                     </div>
                 </div>
                 
+                <!-- Connnections Display on main page -->
                 <div id="populationDiv" class="row">
                     <center>
                         <div class="col s12">  Population:
@@ -72,6 +75,7 @@
                     </center>
                 </div>
 
+                <!-- Where everything displays -->
                 <div class="row">
                     <div class="col s12">
                         <div id="chatBox">
@@ -80,6 +84,7 @@
                     </div>  
                 </div> 
 
+                <!-- Chat test input area and send message button -->
                 <div class="row">
                     <div class="col s12">
                         <div id="chatMessage">
@@ -87,16 +92,17 @@
                                 <center>
                                     <a class="waves-effect waves-light btn" id="sendMessage">Send</a>
                                 </center>
-                                 
+
+                                 <!-- File Button hidden in camera icon for media upload  -->
                                <label for="fileButton">
                                    <a class="btn-medium" id="addPhoto"><i class="material-icons">add_a_photo</i></a>
                                    <input type="file" label="fileButton" id="fileButton" multiple>
                                </label>
-
                         </div>
                     </div>
                 </div>
             </div>
+
 
         <!-- closing container -->
         </div>

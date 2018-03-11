@@ -1,4 +1,4 @@
-
+// Firebase configeration
 var config = {
     apiKey: "AIzaSyBcYCHp3iRwP2_yMoYBPsu7o1TvIv0X9KI",
     authDomain: "pnil-world.firebaseapp.com",
@@ -87,6 +87,7 @@ var timeStamp;
             database.ref("/messages").push({
                 url: url,
                 time: time,
+                userID: userID,
                 dateAdded: firebase.database.ServerValue.TIMESTAMP
             });
         }).catch(function(error) {
@@ -120,6 +121,7 @@ $("#sendMessage").on("click", function(event){
     database.ref("/messages").push({
         message: message,
         timeStamp: timeStamp,
+        userID: userID,
         dateAdded: firebase.database.ServerValue.TIMESTAMP
       });
     
@@ -136,7 +138,7 @@ $(".container").keyup(function (event) {
     }
 });
 
-// grabbing from database (both pictures and )
+// grabbing from database (both pictures and text)
 
 database.ref("/messages").orderByChild("dateAdded").limitToLast(15).on("child_added", function(snapshot){
     message = snapshot.val().message;
@@ -171,6 +173,7 @@ connectionsRef.on("value", function(snap) {
   $("#connectedNum2").text(snap.numChildren());
 });
 
+// For the timestamps to display as they do
 function timeSince(date) {
   var seconds = Math.floor(new Date().getTime() / 1000 - date),
     interval = Math.floor(seconds / 31536000);
