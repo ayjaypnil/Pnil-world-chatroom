@@ -149,6 +149,8 @@ database.ref("/messages").orderByChild("dateAdded").limitToLast(15).on("child_ad
     } else{
         $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div id='cardDiv' class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10' id='messageDivDiv'><span><center><img src='" + url + "'></center></span></div></div><p id='timestampTextM' class='right-align'>" + "About: " + timeSince(time) + " ago" + "</p></div></div>");
     }
+    // for the scroll box to stay at the bottom
+    $("#chatBox").scrollTop($("#chatBox")[0].scrollHeight - $("#chatBox")[0].clientHeight);
 });
 
 
