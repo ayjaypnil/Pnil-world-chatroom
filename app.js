@@ -11,6 +11,12 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 
+$(document).ready(function() {
+   // for the scroll box to stay at the bottom
+    $("#chatBox").scrollTop($("#chatBox")[0].scrollHeight - $("#chatBox")[0].clientHeight);
+});
+
+
 
 //anonymous authentication
 const btnLogin = document.getElementById('btnLogin');
@@ -21,9 +27,12 @@ const popDiv2 = document.getElementById("populationDiv2");
 
 $("#btnLogin").on("click", function(){
     firebase.auth().signInAnonymously();
+   
 });
+
 $("#btnLogout").on("click", function() {
   firebase.auth().signOut();
+  
 });
 
 var userID;
@@ -38,6 +47,9 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         $("#userID").html("<span><strong>" + userID + "</strong></span>");
         space.classList.add("hide");
         popDiv2.classList.add("hide");
+
+        // for the scroll box to stay at the bottom
+        $("#chatBox").scrollTop($("#chatBox")[0].scrollHeight - $("#chatBox")[0].clientHeight);
     } else{
         btnLogout.classList.add('hide');
         btnLogin.classList.remove('hide');
@@ -172,6 +184,8 @@ connectionsRef.on("value", function(snap) {
   $("#connectedNum").text(snap.numChildren());
   $("#connectedNum2").text(snap.numChildren());
 });
+
+
 
 // For the timestamps to display as they do
 function timeSince(date) {
