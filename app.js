@@ -48,7 +48,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 });
 
 
-// pictures
+// PICTURES!
 
 // get elements
 
@@ -61,18 +61,17 @@ var a;
 var file;
 var pathReference;
 var url;
-var imageUrls;
+var time;
+var timeStamp;
 
-    
-
-        fileButton.addEventListener("change", function(e){
+    fileButton.addEventListener("change", function(e){
             // get file
             file = e.target.files[0];
             // create a storage ref
             a = storageRef.child('media/' + file.name);
             console.log(a.fullPath);
             
-            
+           
             // upload file
             a.put(file);   
 
@@ -82,29 +81,18 @@ var imageUrls;
         console.log(pathReference);
         pathReference.getDownloadURL().then(function(url) {
             // `url` is the download URL 
+
+            time = Math.round(new Date().getTime() / 1000);
             // save the download url to the database
-            database.ref("/medias").push({
-                url: url
-                
+            database.ref("/messages").push({
+                url: url,
+                time: time,
+                dateAdded: firebase.database.ServerValue.TIMESTAMP
             });
-      
-    
         }).catch(function(error) {
             if (error) throw error;
         });
             
-        });
-
-
-       
-
-
-
-    database.ref("/medias").orderByChild("dateAdded").limitToLast(5).on("child_added", function(snapshot){
-        url = snapshot.val().url;
-    
-        $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div id='cardDiv' class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10' id='messageDivDiv'><img src='" + url + "></div></div><p id='timestampText' class='right-align'></p></div></div>");
-
     });
 
 
@@ -122,9 +110,8 @@ $("#sendMessage").on("click", function(event){
     event.preventDefault();
 
     var message = $("#typeMessage").val().trim();
-    var today = new Date();
-    var options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
-    var timeStamp = today.toLocaleDateString('en-US', options);
+    
+    timeStamp = Math.round(new Date().getTime() / 1000);
    
     $("#sendMessage").attr("class", "waves-effect waves-light btn");
     
@@ -149,15 +136,22 @@ $(".container").keyup(function (event) {
     }
 });
 
-// grabbing from database
+// grabbing from database (both pictures and )
 
-   database.ref("/messages").orderByChild("dateAdded").limitToLast(15).on("child_added", function(snapshot){
+database.ref("/messages").orderByChild("dateAdded").limitToLast(15).on("child_added", function(snapshot){
     message = snapshot.val().message;
     timeStamp = snapshot.val().timeStamp;
-    // $("#chatBox").append("<div id='messageFull'><strong>" + timeStamp + ": </strong><span id='messageText'>" + message + "</span></div>");
-    $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div id='cardDiv' class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10' id='messageDivDiv'><span id='messageText' class=''>" + message + "</span></div></div><p id='timestampText' class='right-align'>" + timeStamp + "</p></div></div>");
-
+    url = snapshot.val().url;
+    time = snapshot.val().time;
+    
+    if(message){
+        $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div id='cardDiv' class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10' id='messageDivDiv'><span id='messageText' class=''>" + message + "</span></div></div><p id='timestampText' class='right-align'>" + "About: " + timeSince(timeStamp) + " ago" + "</p></div></div>");
+    } else{
+        $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div id='cardDiv' class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10' id='messageDivDiv'><span><center><img src='" + url + "'></center></span></div></div><p id='timestampTextM' class='right-align'>" + "About: " + timeSince(time) + "ago" + "</p></div></div>");
+    }
 });
+
+
 
 // Live connected feature
 var connectionsRef = database.ref("/connections");
@@ -174,3 +168,24 @@ connectionsRef.on("value", function(snap) {
   $("#connectedNum").text(snap.numChildren());
   $("#connectedNum2").text(snap.numChildren());
 });
+
+function timeSince(date) {
+  var seconds = Math.floor(new Date().getTime() / 1000 - date),
+    interval = Math.floor(seconds / 31536000);
+
+  if (interval > 1) return interval + "y";
+
+  interval = Math.floor(seconds / 2592000);
+  if (interval > 1) return interval + "m";
+
+  interval = Math.floor(seconds / 86400);
+  if (interval >= 1) return interval + "d";
+
+  interval = Math.floor(seconds / 3600);
+  if (interval >= 1) return interval + "h";
+
+  interval = Math.floor(seconds / 60);
+  if (interval > 1) return interval + "m ";
+
+  return Math.floor(seconds) + "s";
+}

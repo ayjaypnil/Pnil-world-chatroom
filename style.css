@@ -36,9 +36,11 @@ input{
     height: auto;
     margin: 1px;
 }
-#timestampText{
+#timestampText,
+#timestampTextM {
     color: rgba(206, 206, 206, 0.671);
 }
+
 
 #cardDiv, p {
     padding: 0 !important;
@@ -67,6 +69,7 @@ input[type="file"] {
     margin-right: 50px;
 }
 img{
-    max-height: 75%;
-    max-width: 75%;
+    height: 120px;
+    width: auto;
+    margin-top: 10px;
 }
