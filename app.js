@@ -85,27 +85,24 @@ var timeStamp;
             
            
             // upload file
-            a.put(file);   
-
-             // Listen for file selection
-        // download the file
-        pathReference = a;
-        console.log(pathReference);
-        pathReference.getDownloadURL().then(function(url) {
-            // `url` is the download URL 
-
-            time = Math.round(new Date().getTime() / 1000);
-            // save the download url to the database
-            database.ref("/messages").push({
-                url: url,
-                time: time,
-                userID: userID,
-                dateAdded: firebase.database.ServerValue.TIMESTAMP
-            });
+            a.put(file).then(function(result){
+            console.log(result);
+                // download the file
+                a.getDownloadURL().then(function(url) {
+                // `url` is the download URL 
+                    console.log(url);
+                    time = Math.round(new Date().getTime() / 1000);
+                    // save the download url to the database
+                    database.ref("/messages").push({
+                        url: url,
+                        time: time,
+                        userID: userID,
+                        dateAdded: firebase.database.ServerValue.TIMESTAMP
+                });
+            });       
         }).catch(function(error) {
             if (error) throw error;
         });
-            
     });
 
 
