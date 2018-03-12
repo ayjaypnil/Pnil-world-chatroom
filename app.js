@@ -81,7 +81,7 @@ var timeStamp;
             file = e.target.files[0];
             // create a storage ref
             a = storageRef.child('media/' + file.name);
-            console.log(a.fullPath);
+            console.log(a);
             
            
             // upload file
@@ -160,7 +160,7 @@ database.ref("/messages").orderByChild("dateAdded").limitToLast(15).on("child_ad
     
     if(message){
         $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div id='cardDiv' class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10' id='messageDivDiv'><span id='messageText' class=''>" + message + "</span></div></div><p id='timestampText' class='right-align'>" + "About: " + timeSince(timeStamp) + " ago" + "</p></div></div>");
-    } else{
+    } else if (){
         $("#chatBox").append("<div id='mediaBox' class='col s12 m8'><div id='cardDiv' class='card-panel grey lighten-5 z-depth-1'><div class='row valign-wrapper'><div class='col s10' id='messageDivDiv'><span><center><img src='" + url + "'></center></span></div></div><p id='timestampTextM' class='right-align'>" + "About: " + timeSince(time) + " ago" + "</p></div></div>");
     }
     // for the scroll box to stay at the bottom
