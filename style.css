@@ -75,3 +75,9 @@ img{
     width: auto;
     margin-top: 10px;
 }
+
+#mobile-demo {
+    background: rgba(39, 39, 39, 0.623);
+    color: white;
+}
+
