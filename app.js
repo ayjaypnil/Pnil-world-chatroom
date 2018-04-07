@@ -117,6 +117,7 @@ $("#typeMessage").on("click", function(event){
 
 
 $("#sendMessage").on("click", function(event){
+    
     event.preventDefault();
 
     var message = $("#typeMessage").val().trim();
@@ -138,7 +139,7 @@ $("#sendMessage").on("click", function(event){
     $("#typeMessage").val("");
     // for the scroll box to stay at the bottom
     $("#chatBox").scrollTop($("#chatBox")[0].scrollHeight - $("#chatBox")[0].clientHeight);
-   
+    
 });
     // just another way to register the send, "enter" button
 $(".container").keyup(function (event) {
@@ -205,3 +206,19 @@ function timeSince(date) {
 
   return Math.floor(seconds) + "s";
 }
+
+
+// SIDEBAR
+$(document).ready(function(){
+  $('.button-collapse').sideNav({
+      menuWidth: 275, // Default is 300
+      edge: 'left', // Choose the horizontal origin
+      closeOnClick: false, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+      draggable: true // Choose whether you can drag to open on touch screens
+    }
+  );
+    $(".parallax").parallax();
+});
+ 
+ // START OPEN
+$('.button-collapse').sideNav('show');

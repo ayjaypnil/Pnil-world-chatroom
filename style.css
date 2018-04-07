@@ -1,9 +1,12 @@
 #chatBox{
     height: 433px;
     width: auto;
-    border: 3.33px solid rgb(194, 194, 194);
+    border: 3.33px solid rgb(146, 146, 146);
     padding: 3px;
     overflow-y: scroll;
+}
+img:hover {
+    transform: scale(3.0);
 }
 
 #messageText{
@@ -38,9 +41,8 @@ input{
 }
 #timestampText,
 #timestampTextM {
-    color: rgba(206, 206, 206, 0.671);
+    color: rgb(177, 177, 177);
 }
-
 
 #cardDiv, p {
     padding: 0 !important;

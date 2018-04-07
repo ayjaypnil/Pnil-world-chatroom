@@ -20,6 +20,10 @@
     <body>
         
         <div class="container">
+            <!-- side navbar button-->
+                <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large ">
+                    <i class="material-icons medium " id="menuIcon" >menu</i>
+                </a>
 
             <!-- Initial log in screen Section, hides after logged in -->
             <div id= "message">
@@ -44,10 +48,41 @@
                     </div>
                 </div>    
                 <!-- When not logged in, this is all visible, else it is hidden -->
+                
+                <!-- side navbar -->
+                    <div class="nav-wrapper">
+
+                    <ul class="side-nav" id="mobile-demo">
+                    
+                    <br>
+                    <br>
+
+
+                        <br>
+                        <br>
+                        <br> 
+                        <br>
+                        <br>
+                        <br> 
+                        <!-- footer for the sidebar -->
+                            <div class="row"> 
+                                <div class="col-sm-4" id="sideIcons">
+                                    <li><a href="about.html"><i class="material-icons " id="menuIcon">lightbulb_outline</i>About</a></li>  
+                                </div>
+                            </div>
+                            
+                    </ul> 
+                </div>
+
+
+
+
+
+
                 <ul>
                     <li>
                         <center><a id="btnLogin" class="pulse waves-effect waves-light btn" href="#">Login Anonymously</a></center>
-                        
+
                     </li>
 
                     <li>
@@ -88,7 +123,7 @@
                 <div class="row">
                     <div class="col s12">
                         <div id="chatMessage">
-                            <center><input id="typeMessage" placeholder="Type Message Here!" type="text"></center>
+                            <center><input class="validate" id="typeMessage" placeholder="Type Message Here!" type="text"></center>
                                 <center>
                                     <a class="waves-effect waves-light btn" id="sendMessage">Send</a>
                                 </center>
